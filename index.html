@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 20th Birthday! 🎉</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fed6e3 0%, #a8c1ef 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 35px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid rgba(255,255,255,0.5);
+            position: relative;
+        }
+
+        /* Classes to show/hide sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.3rem;
+            color: #ff4a7d;
+            margin-bottom: 15px;
+        }
+
+        .age-badge {
+            background: #ff4a7d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        /* Countdown Style */
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .time-box {
+            background: #ffffff;
+            padding: 8px 12px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            min-width: 65px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4a6fa5;
+        }
+
+        .time-box label {
+            font-size: 0.75rem;
+            color: #777;
+            text-transform: uppercase;
+        }
+
+        .clickable-text {
+            color: #ff4a7d;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 20px;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .clickable-text:hover {
+            transform: scale(1.05);
+        }
+
+        /* Funny Letter Card */
+        .funny-card {
+            background: #fff;
+            border: 2px dashed #ff4a7d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            animation: slideDown 0.5s ease-out forwards;
+        }
+
+        /* Section 2: Photo Collage */
+        .collage {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .collage img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid #fff;
+            transition: transform 0.3s;
+        }
+
+        .collage img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Buttons */
+        .btn {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.3);
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #3b5984;
+            transform: translateY(-2px);
+        }
+
+        /* Section 3: Wish Letter */
+        .wish-letter {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            line-height: 1.7;
+            text-align: justify;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music (M4A Format) -->
+    <audio id="bgMusic" loop>
+        <source src="hbd.m4a" type="audio/x-m4a">
+        <source src="hbd.m4a" type="audio/mp4">
+    </audio>
+
+    <div class="container">
+
+        <!-- ================= SECTION 1: COUNTDOWN ================= -->
+        <div id="section1" class="section active">
+            <h1>Countdown to 20! 🎉</h1>
+            <div class="age-badge">17.7.2006 ➜ 17.7.2026 ✨</div>
+
+            <div id="countdown">
+                <div class="time-box"><span id="days">00</span><label>Days</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Mins</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Secs</label></div>
+            </div>
+
+            <p class="clickable-text" onclick="checkTimeForSection2()">မွေးနေ့လက်ဆောင်လေး ကြိုကြည့်ရအောင် 👉 Click Here</p>
+
+            <!-- Funny Letter -->
+            <div id="funnyLetter" class="funny-card">
+                <h3>ဟဲ့!!🤫</h3>
+                <p style="margin-top: 10px; font-size: 0.95rem; line-height: 1.5; color: #ff4a7d;">
+                    မွေးနေ့က မရောက်သေးဘူးနော်! <br>
+                    ၁၂ နာရီတိတိကျမှ ပြန်လာဖွင့်ကြည့်" <br>
+                    see you...
+                </p>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 2: PHOTO COLLAGE & MUSIC ================= -->
+        <div id="section2" class="section">
+            <h1 style="color: #ff4a7d;">Happy 20th Birthday! 🥳</h1>
+            <p style="margin-bottom: 10px;">မွေးနေ့ရှင်လေး ရောက်လာပြီမို့ သီချင်းလေးနဲ့ ကြိုဆိုပါတယ်!</p>
+            
+            <!-- သင့်ပုံ ၄ ပုံ -->
+            <div class="collage">
+                <img src="img1.jpg" alt="Friend 1">
+                <img src="img2.jpg" alt="Friend 2">
+                <img src="img3.jpg" alt="Friend 3">
+                <img src="img4.jpg" alt="Friend 4">
+            </div>
+
+            <button class="btn" onclick="goToSection3()">Next Page (Wish Letter) ✉️</button>
+        </div>
+
+
+        <!-- ================= SECTION 3: WISH LETTER ================= -->
+        <div id="section3" class="section">
+            <h1 style="color: #ff4a7d; margin-bottom: 20px;">My Wish to You 💖</h1>
+            
+            <div class="wish-letter">
+                <p>🎂 <b>ချစ်ရတဲ့ သူငယ်ချင်းသို့...</b><br><br>
+                ဒီနေ့မှာ အသက် ၂၀ တင်းတင်း ပြည့်သွားပြီနော်။ (ဝမ်းသာပါတယ် ဟိ") ဆယ်ကျော်သက်အရွယ်ကနေ လူကြီးပိုင်းထဲကို စဝင်လာတဲ့ ဒီခြေလှမ်းမှာဖြစ်ချင်တဲ့ ဆန္ဒတွေအကုန်လုံး တစ်ခုမကျန် ပြည့်ဝပါစေ။<br><br>
+                နင်နဲ့အတူရှိခဲ့တဲ့ အမှတ်တရတွေက ငါ့အတွက် အမြဲတန်ဖိုးရှိပါတယ်။ ဘဝမှာ အခက်အခဲတွေ ရှိခဲ့ရင်လည်းအေးဆေးပါ တူတူကျော်ကြတာပေါ့ ဘာပဲဖြစ်ဖြစ် ဒီထက်မကပိုပြီးလှပ၊ ပိုပြီးအောင်မြင်တဲ့ ဘဝခရီးလမ်းကို ပိုင်ဆိုင်နိုင်ပါစေ။ စိတ်ချမ်းသာ ကိုယ်ကျန်းမာနဲ့ အမြဲပြုံးပျော်နိုင်ပါစေနော်! သူငယ်ဂျိုး 🎉🍰 </p>
+            </div>
+
+            <button class="btn" onclick="goToSection2()" style="background: #777; margin-right: 10px;">Back to Photos</button>
+        </div>
+
+    </div>
+
+    <script>
+        // 🎯 ဇူလိုင်လ ၁၇ ရက် ည ၁၂ နာရီတိတိ Countdown အတည်ပြုရက်စွဲ
+        const birthday = new Date("July 17, 2026 00:00:00").getTime();
+
+        // Countdown System
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = birthday - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance > 0) {
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            } else {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<h3 style='color:#ff4a7d;'>အချိန်ကျရောက်ပါပြီ! 🎉</h3>";
+            }
+        }, 1000);
+
+        // Section 1 မှ နှိပ်လိုက်သည့်အခါ စစ်ဆေးချက်
+        function checkTimeForSection2() {
+            const now = new Date().getTime();
+            
+            if (now < birthday) {
+                const funnyLetter = document.getElementById("funnyLetter");
+                funnyLetter.style.display = "block";
+            } else {
+                switchSection("section1", "section2");
+                playBirthdaySong();
+            }
+        }
+
+        // Section ပြောင်းလဲပေးသော Function
+        function switchSection(fromId, toId) {
+            document.getElementById(fromId).classList.remove("active");
+            document.getElementById(toId).classList.add("active");
+        }
+
+        // သီချင်းဖွင့်ခြင်း
+        function playBirthdaySong() {
+            const music = document.getElementById("bgMusic");
+            music.play().catch(error => {
+                console.log("Audio autoplay was blocked. It will play on next interaction.");
+            });
+        }
+
+        function goToSection3() {
+            switchSection("section2", "section3");
+        }
+
+        function goToSection2() {
+            switchSection("section3", "section2");
+        }
+    </script>
+</body>
+  </html>
+  
